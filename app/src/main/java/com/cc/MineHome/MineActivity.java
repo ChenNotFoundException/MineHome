@@ -2,7 +2,10 @@ package com.cc.MineHome;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -10,6 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 
+import com.cc.MineHome.MyAdapter.MyAdapter;
+import com.cc.MineHome.POJO.MineShare;
 import com.cc.MineHome.util.StatusBarUtil;
 
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
@@ -17,18 +22,49 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.scwang.smartrefresh.layout.util.SmartUtil;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 微博主页
+ * 主页
  */
 public class MineActivity extends AppCompatActivity {
 
     private int mOffset = 0;
     private int mScrollY = 0;
 
+    private List<MineShare> mData;
+    private ListView mListViewArray;
+    private String[] urls;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_weibo);
+
+        /**
+         * 加载我的图片
+         */
+        //为ListView对象赋值
+        mListViewArray = (ListView) findViewById(R.id.MyHomeListView);
+        LayoutInflater inflater = getLayoutInflater();
+        //初始化数据
+        try {
+            initData();
+        } catch (ParseException e) {
+            finish();
+            e.printStackTrace();
+        }
+        //创建自定义Adapter的对象
+        MyAdapter adapter = new MyAdapter(getApplicationContext(), urls,mData);
+        //将布局添加到ListView中
+        mListViewArray.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        /**/
+
+
 
         final Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -108,6 +144,31 @@ public class MineActivity extends AppCompatActivity {
         });
         buttonBar.setAlpha(0);
         toolbar.setBackgroundColor(0);
+    }
+
+    private void initData() throws ParseException {
+
+        urls = new String[]{
+                "http://192.168.1.105:8080/img/outslogo.png",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1581871450952&di=4ba3a369bedb14e6af55012370ca8553&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3575349163%2C2696218413%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D900%26h%3D1350",
+                "http://192.168.1.105:8080/img/outslog.png",
+                "http://192.168.1.105:8080/img/photo.jpg",
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1581871450952&di=4ba3a369bedb14e6af55012370ca8553&imgtype=0&src=http%3A%2F%2Ft8.baidu.com%2Fit%2Fu%3D3575349163%2C2696218413%26fm%3D79%26app%3D86%26f%3DJPEG%3Fw%3D900%26h%3D1350",
+        };
+        mData = new ArrayList<MineShare>();
+
+        String s = "08:01";
+        MineShare content1 = new MineShare(s, "/img/outslogo.png", "cc");
+        MineShare content2 = new MineShare(s, "/img/photo.jpg", "这里我说了好多好多哈偶卡恢复健康哈市冀凯股份哈数据库凤凰健康");
+        MineShare content3 = new MineShare(s, "/img/photo.jpg", "尝试完全的内容");
+        MineShare content4 = new MineShare(s, "/img/outslog.png", "english");
+        MineShare content5 = new MineShare(s, "/img/outslogo.png", "尝试完全的内容");
+
+        mData.add(content1);
+        mData.add(content2);
+        mData.add(content3);
+        mData.add(content4);
+        mData.add(content5);
     }
 
 }

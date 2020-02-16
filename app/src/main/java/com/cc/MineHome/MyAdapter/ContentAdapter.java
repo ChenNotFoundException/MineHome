@@ -1,4 +1,4 @@
-package com.cc.MineHome;
+package com.cc.MineHome.MyAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cc.MineHome.POJO.Content;
+import com.cc.MineHome.R;
 
 import java.util.List;
 
