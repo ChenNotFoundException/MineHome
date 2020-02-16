@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.cc.webviewdemo"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation 'androidx.appcompat:appcompat:1.1.0'
+//    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test:runner:1.2.0'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //new implementations
+    implementation 'com.marshalchen.ultimaterecyclerview:library:0.9.0'
+    implementation 'com.makeramen:roundedimageview:2.2.1'
+    implementation 'com.github.SheHuan:NiceImageView:1.0.5'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
+
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+//    compile project(':refresh-header')
+//    compile project(':refresh-layout')
+
+    implementation ('com.android.support:design:29') {
+
+//        exclude group: 'com.android.support'
+    }
+
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-1'
+//    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4-7'
+//    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4-7'
+//    compile 'com.android.support:design:25.3.1'
+    implementation 'com.android.support:appcompat-v7:29'
+    implementation 'com.android.support:recyclerview-v7:29'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
+    testImplementation 'junit:junit:4.12'
+}
